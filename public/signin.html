@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name='viewport' content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../../static/css/signin.css">
+
+        <title>Вход</title>
+    </head>
+    <body>
+        
+        <div class="form">
+            <h2 class="greetmessage">Вход в систему</h2>
+            <h4 class="greetexplain">Заполните данную форму, чтобы войти</h4>
+
+            <form method="post" autocomplete="off" name="loginForm">
+                <label class="hostlabel" for="host">    
+                    <h6>Хост сервера</h6>
+                </label>
+                <input class="input" id="host" placeholder="Введите хост сервера" name="host" required>
+
+                <label class="portlabel" for="port">
+                    <h6>Порт сервера</h6>
+                </label>
+                <input class="input" id="post" placeholder="Введите порт сервера" name="port" required>
+
+                <label class="passwordlabel" for="password">
+                    <h6>Введите пароль</h6>
+                </label>
+                <input class= "input" type="password" placeholder="Введите пароль" name="password" required>
+
+                <button id="submit" type="submit" class="loginbtn">Войти</button>
+            </form>
+        </div>
+        <script src="/static/js/dataTransfer.js"></script>
+    </body>
+</html>
