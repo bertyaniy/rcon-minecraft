@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import { Rcon } from 'rcon-client';
 
 export class RconController {
@@ -17,7 +17,13 @@ export class RconController {
         
     }
 
-    public static async execute(res: Response, command: string) {
+    public static async execute(req: Request, res: Response) {
+
+        const { command } = req.body;
+
+        if (!command) {
+            return res.status(404);
+        }
 
         try {
             await this.rcon.send(command);
