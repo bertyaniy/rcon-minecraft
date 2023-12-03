@@ -1,10 +1,12 @@
-import { Response, Request } from 'express';
+import { Request, Response } from 'express';
 import { Rcon } from 'rcon-client';
 
 export class RconController {
-    static rcon: Rcon;
+    rcon: Rcon | undefined;
 
-    public static async connect(host: string, port: number, password: string, res: Response) {
+    constructor() {}
+
+    public async connect(host: string, port: number, password: string, res: Response) {
 
         try {
             this.rcon = await Rcon.connect({
@@ -17,28 +19,36 @@ export class RconController {
         
     }
 
-    public static async execute(req: Request, res: Response) {
+    public async execute(req: Request, res: Response) {
 
         const { command } = req.body;
 
-        if (!command) {
-            return res.status(404);
+        if (this.rcon == undefined || !command) {
+            return res.sendStatus(404);
         }
 
         try {
-            await this.rcon.send(command);
-            return res.status(200);
+            const response = await this.rcon.send(command);
+            return res.status(200).send(response);
         } catch (error) {
+            console.log(error);
             return res.status(500).send(error);
         }
 
     }
 
-    public static async disconnect(res: Response) {
+    public async disconnect(res: Response) {
+
+        if (!this.rcon) {
+            console.log("RCON NOT FOUND");
+            return res.sendStatus(404);
+        }
         
         try {
+            console.log(this.rcon);
             await this.rcon.end();
-            return res.status(200);
+            this.rcon = undefined;
+            return res.sendStatus(200);
         } catch (error) {
             return res.status(500).send(error);
         }

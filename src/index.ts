@@ -1,12 +1,12 @@
 import express from 'express';
-import { authRouter } from './modules/auth/auth.router';
+import { router } from './modules/main.router';
 
 const app = express();
 
 const bootstrap = async () => {
 
     app.use(express.json());
-    app.use(authRouter)
+    app.use(router);
 
     app.listen(3000, () => {
         console.log("Server has been started");
