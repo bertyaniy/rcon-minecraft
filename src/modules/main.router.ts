@@ -1,10 +1,10 @@
 import express from 'express';
 
-import { AuthController } from "./rcon/rcon.service";
+import { RconService } from "./rcon/rcon.service";
 
 const router = express.Router();
 
-const auth = new AuthController();
+const auth = new RconService();
 
 router.route('/auth').post(auth.connect);
 router.route('/disconnect').post(auth.disconnect);

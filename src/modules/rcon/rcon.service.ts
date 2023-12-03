@@ -3,7 +3,7 @@ import { RconController } from './rcon.controller'
 
 const rcon  = new RconController();
 
-export class AuthController {
+export class RconService {
 
     public async connect(req: Request, res: Response) {
 
